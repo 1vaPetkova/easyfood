@@ -87,7 +87,6 @@
                 android:id="@+id/popular_items"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/myfont"
                 android:text="@string/popular_items"
@@ -99,7 +98,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_popular_items"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/_90sdp"
                 android:layout_marginStart="@dimen/_25sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -116,7 +115,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/recycler_popular_items"
+                app:layout_constraintStart_toStartOf="@id/popular_items"
                 app:layout_constraintTop_toBottomOf="@id/recycler_popular_items" />
 
             <androidx.cardview.widget.CardView
