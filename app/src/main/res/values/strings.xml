@@ -10,4 +10,8 @@
     <string name="categories">Categories</string>
     <string name="what_would_you_like_to_eat">What would you like to eat?</string>
     <string name="popular_items">Popular Items</string>
+    <string name="favourite_meal">Favourite meal</string>
+    <string name="category">Category: </string>
+    <string name="area">Area: </string>
+    <string name="instructions">Instructions :</string>
 </resources>
