@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.easyfood.entities.CategoryList
+import com.example.easyfood.entities.CategoryMeal
 import com.example.easyfood.entities.Meal
 import com.example.easyfood.entities.MealList
 import com.example.easyfood.retrofit.RetrofitInstance
@@ -14,7 +15,7 @@ import retrofit2.Response
 
 class HomeViewModel() : ViewModel() {
     private var randomMealLiveData = MutableLiveData<Meal>()
-
+    private var popularItemsLiveData = MutableLiveData<List<CategoryMeal>>()
     fun getRandomMeal() {
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList> {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
@@ -39,17 +40,24 @@ class HomeViewModel() : ViewModel() {
                     call: Call<CategoryList>,
                     response: Response<CategoryList>
                 ) {
-                    TODO("Not yet implemented")
+                    if (response.body() != null) {
+                        popularItemsLiveData.value = response.body()!!.meals
+                    } else {
+                        return
+                    }
                 }
 
                 override fun onFailure(call: Call<CategoryList>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Log.d("HomeFragment", t.message.toString())
                 }
-
             })
     }
 
     fun observeRandomMealLiveData(): LiveData<Meal> {
         return randomMealLiveData
+    }
+
+    fun observePopularItemsLiveData(): LiveData<List<CategoryMeal>> {
+        return popularItemsLiveData
     }
 }

@@ -30,7 +30,7 @@ class MealViewModel() : ViewModel() {
         })
     }
 
-    fun observeMealDetailsData(): LiveData<Meal> {
+    fun getMealDetailsData(): LiveData<Meal> {
         return mealDetailsLiveData
     }
 }

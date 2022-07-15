@@ -2,24 +2,21 @@ package com.example.easyfood.activities
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
 import com.example.easyfood.databinding.ActivityMealBinding
-import com.example.easyfood.entities.Meal
 import com.example.easyfood.fragments.HomeFragment
-import com.example.easyfood.viewModel.HomeViewModel
 import com.example.easyfood.viewModel.MealViewModel
 
 class MealActivity : AppCompatActivity() {
     private lateinit var mealId: String
     private lateinit var mealName: String
     private lateinit var mealThumb: String
-    private lateinit var youtubeUrl: String
+    private var youtubeUrl: String? = null
     private lateinit var binding: ActivityMealBinding
     private lateinit var mealViewModel: MealViewModel
 
@@ -37,17 +34,18 @@ class MealActivity : AppCompatActivity() {
     }
 
     private fun onYoutubeImageClick() {
-        binding.imageYoutube.setOnClickListener{
+        binding.imageYoutube.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
             startActivity(intent)
         }
     }
 
     private fun observeMealDetailsLiveData() {
-        mealViewModel.observeMealDetailsData().observe(
+        mealViewModel.getMealDetailsData().observe(
             this
         ) {
             onResponseCase()
+            youtubeUrl = it.strYoutube
             binding.tvCategory.text = "Category: ${it!!.strCategory}"
             binding.tvArea.text = "Area: ${it.strArea}"
             binding.tvInstructionsSteps.text = it.strInstructions
@@ -70,7 +68,8 @@ class MealActivity : AppCompatActivity() {
         mealId = intent.getStringExtra(HomeFragment.MEAL_ID)!!
         mealName = intent.getStringExtra(HomeFragment.MEAL_NAME)!!
         mealThumb = intent.getStringExtra(HomeFragment.MEAL_THUMB)!!
-        youtubeUrl = intent.getStringExtra(HomeFragment.YOUTUBE_URI)!!
+        youtubeUrl = intent.getStringExtra(HomeFragment.YOUTUBE_URI)
+
     }
 
     private fun loadingCase() {

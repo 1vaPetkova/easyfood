@@ -9,6 +9,7 @@ import com.example.easyfood.entities.CategoryMeal
 
 class MostPopularMealsAdapter() :
     RecyclerView.Adapter<MostPopularMealsAdapter.PopularMealViewHolder>() {
+    lateinit var onItemClick: ((CategoryMeal) -> Unit)
     private var mealsList = ArrayList<CategoryMeal>()
 
     fun setMeals(mealsList: ArrayList<CategoryMeal>) {
@@ -31,6 +32,9 @@ class MostPopularMealsAdapter() :
             .with(holder.itemView)
             .load(mealsList[position].strMealThumb)
             .into(holder.binding.imgPopularMealItem)
+        holder.itemView.setOnClickListener{
+            onItemClick.invoke(mealsList[position])
+        }
     }
 
     override fun getItemCount(): Int {
