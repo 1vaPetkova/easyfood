@@ -57,7 +57,6 @@ class MealActivity : AppCompatActivity() {
             .with(applicationContext)
             .load(mealThumb)
             .into(binding.imgMealDetail)
-
         binding.collapsingToolbar.title = mealName
         binding.collapsingToolbar.setCollapsedTitleTextColor(getColor(R.color.white))
         binding.collapsingToolbar.setExpandedTitleColor(getColor(R.color.white))

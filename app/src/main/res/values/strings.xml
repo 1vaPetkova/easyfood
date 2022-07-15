@@ -14,4 +14,6 @@
     <string name="category">Category: </string>
     <string name="area">Area: </string>
     <string name="instructions">Instructions :</string>
+    <string name="random_meal_name">Random meal name</string>
+    <string name="category_name">Category name</string>
 </resources>

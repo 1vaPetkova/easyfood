@@ -1,6 +1,6 @@
 package com.example.easyfood.entities
 
-data class CategoryMeal(
+data class MealByCategory(
     val idMeal: String,
     val strMeal: String,
     val strMealThumb: String
