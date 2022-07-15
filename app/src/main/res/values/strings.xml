@@ -16,4 +16,6 @@
     <string name="instructions">Instructions :</string>
     <string name="random_meal_name">Random meal name</string>
     <string name="category_name">Category name</string>
+    <string name="category_description">Category Description</string>
+    <string name="meal_name">Meal name</string>
 </resources>

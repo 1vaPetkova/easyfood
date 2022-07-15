@@ -6,4 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".activities.CategoryMealsActivity">
 
+    <TextView
+        android:id="@+id/tv_category_meals_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/myfont"
+        android:text="Category: CountOfMeals"
+        android:textAlignment="center"
+        android:textColor="@color/accent"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_category_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/myfont"
+        android:text="@string/category_description"
+        android:textAlignment="center"
+        android:textColor="@color/teal_700"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_category_meals_count" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_meals"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tv_category_description"
+        app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
