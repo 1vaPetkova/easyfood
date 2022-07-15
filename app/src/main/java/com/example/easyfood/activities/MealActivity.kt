@@ -33,8 +33,7 @@ class MealActivity : AppCompatActivity() {
         binding = ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //create mealViewModel
-        val mealDatabase = MealDatabase.getInstance(this)
-        val viewModelFactory = MealViewModelFactory(mealDatabase)
+        val viewModelFactory = MealViewModelFactory(MealDatabase.getInstance(this))
         mealViewModel = ViewModelProvider(this, viewModelFactory)[MealViewModel::class.java]
 
         getMealInformationFromIntent()
