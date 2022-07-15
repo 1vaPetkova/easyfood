@@ -2,6 +2,7 @@ package com.example.easyfood.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+
 import com.example.easyfood.entities.Meal
 
 @Dao

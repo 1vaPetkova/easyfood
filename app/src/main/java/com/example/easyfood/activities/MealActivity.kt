@@ -4,17 +4,20 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
 import com.example.easyfood.databinding.ActivityMealBinding
-import com.example.easyfood.fragments.HomeFragment
+import com.example.easyfood.db.MealDatabase
+import com.example.easyfood.entities.Meal
 import com.example.easyfood.utils.Constants.Companion.MEAL_ID
 import com.example.easyfood.utils.Constants.Companion.MEAL_NAME
 import com.example.easyfood.utils.Constants.Companion.MEAL_THUMB
 import com.example.easyfood.utils.Constants.Companion.YOUTUBE_URI
 import com.example.easyfood.viewModel.MealViewModel
+import com.example.easyfood.viewModel.MealViewModelFactory
 
 class MealActivity : AppCompatActivity() {
     private lateinit var mealId: String
@@ -23,12 +26,16 @@ class MealActivity : AppCompatActivity() {
     private var youtubeUrl: String? = null
     private lateinit var binding: ActivityMealBinding
     private lateinit var mealViewModel: MealViewModel
+    private var mealToSave: Meal? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mealViewModel = ViewModelProvider(this)[MealViewModel::class.java]
+        //create mealViewModel
+        val mealDatabase = MealDatabase.getInstance(this)
+        val viewModelFactory = MealViewModelFactory(mealDatabase)
+        mealViewModel = ViewModelProvider(this, viewModelFactory)[MealViewModel::class.java]
 
         getMealInformationFromIntent()
         loadingCase()
@@ -36,6 +43,16 @@ class MealActivity : AppCompatActivity() {
         mealViewModel.getMealDetails(mealId)
         observeMealDetailsLiveData()
         onYoutubeImageClick()
+        onFavouriteClick()
+    }
+
+    private fun onFavouriteClick() {
+        binding.btnAddToFavourites.setOnClickListener {
+            mealToSave?.let {
+                mealViewModel.insertMealToFavourites(it)
+                Toast.makeText(this, "Meal saved!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun onYoutubeImageClick() {
@@ -50,6 +67,7 @@ class MealActivity : AppCompatActivity() {
             this
         ) {
             onResponseCase()
+            mealToSave = it
             youtubeUrl = it.strYoutube
             binding.tvCategory.text = "Category: ${it!!.strCategory}"
             binding.tvArea.text = "Area: ${it.strArea}"

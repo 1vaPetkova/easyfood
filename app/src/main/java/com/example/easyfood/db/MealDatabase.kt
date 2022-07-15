@@ -9,22 +9,25 @@ import com.example.easyfood.entities.Meal
 
 @Database(entities = [Meal::class], version = 1, exportSchema = false)
 @TypeConverters(MealTypeConverter::class)
-abstract class MealDB : RoomDatabase() {
+abstract class MealDatabase : RoomDatabase() {
     abstract fun mealDao(): MealDao
 
     companion object {
         @Volatile
-        var INSTANCE: MealDB? = null
-
+        var INSTANCE: MealDatabase? = null
 
         @Synchronized
-        fun getInstance(context: Context): MealDB {
+        fun getInstance(context: Context): MealDatabase {
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(context, MealDB::class.java, "meal.db")
+                INSTANCE = Room.databaseBuilder(
+                    context.applicationContext,
+                    MealDatabase::class.java,
+                    "meals"
+                )
                     .fallbackToDestructiveMigration()
                     .build()
             }
-            return INSTANCE as MealDB
+            return INSTANCE as MealDatabase
         }
     }
 }
