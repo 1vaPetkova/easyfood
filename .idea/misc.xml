@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_favourite.xml" value="0.213" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.2015" />
         <entry key="app/src/main/res/drawable/ic_youtube.xml" value="0.104" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.21203703703703702" />
