@@ -23,7 +23,7 @@ class HomeViewModel() : ViewModel() {
             }
 
             override fun onFailure(call: Call<MealList>, t: Throwable) {
-                Log.d("HomeFragment", t.message.toString())
+                Log.d("HomeViewModel", t.message.toString())
             }
         })
     }
@@ -41,7 +41,7 @@ class HomeViewModel() : ViewModel() {
                 }
 
                 override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
-                    Log.d("HomeFragment", t.message.toString())
+                    Log.d("HomeViewModel", t.message.toString())
                 }
             })
     }

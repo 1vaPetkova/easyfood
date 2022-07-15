@@ -12,8 +12,8 @@ class CategoriesAdapter() :
     inner class CategoryViewHolder(var binding: CategoryItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-
     private var categories = ArrayList<Category>()
+    lateinit var onItemClick: ((Category) -> Unit)
 
     fun setCategories(categories: ArrayList<Category>) {
         this.categories = categories
@@ -36,6 +36,9 @@ class CategoriesAdapter() :
             .load(categories[position].strCategoryThumb)
             .into(holder.binding.imgCategory)
         holder.binding.tvCategoryName.text = categories[position].strCategory
+        holder.itemView.setOnClickListener {
+            onItemClick.invoke(categories[position])
+        }
     }
 
     override fun getItemCount(): Int {

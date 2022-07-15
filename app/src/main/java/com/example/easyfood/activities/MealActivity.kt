@@ -10,6 +10,10 @@ import com.bumptech.glide.Glide
 import com.example.easyfood.R
 import com.example.easyfood.databinding.ActivityMealBinding
 import com.example.easyfood.fragments.HomeFragment
+import com.example.easyfood.utils.Constants.Companion.MEAL_ID
+import com.example.easyfood.utils.Constants.Companion.MEAL_NAME
+import com.example.easyfood.utils.Constants.Companion.MEAL_THUMB
+import com.example.easyfood.utils.Constants.Companion.YOUTUBE_URI
 import com.example.easyfood.viewModel.MealViewModel
 
 class MealActivity : AppCompatActivity() {
@@ -25,6 +29,7 @@ class MealActivity : AppCompatActivity() {
         binding = ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mealViewModel = ViewModelProvider(this)[MealViewModel::class.java]
+
         getMealInformationFromIntent()
         loadingCase()
         setInformationInViews()
@@ -64,11 +69,10 @@ class MealActivity : AppCompatActivity() {
 
     private fun getMealInformationFromIntent() {
         val intent = intent
-        mealId = intent.getStringExtra(HomeFragment.MEAL_ID)!!
-        mealName = intent.getStringExtra(HomeFragment.MEAL_NAME)!!
-        mealThumb = intent.getStringExtra(HomeFragment.MEAL_THUMB)!!
-        youtubeUrl = intent.getStringExtra(HomeFragment.YOUTUBE_URI)
-
+        mealId = intent.getStringExtra(MEAL_ID)!!
+        mealName = intent.getStringExtra(MEAL_NAME)!!
+        mealThumb = intent.getStringExtra(MEAL_THUMB)!!
+        youtubeUrl = intent.getStringExtra(YOUTUBE_URI)
     }
 
     private fun loadingCase() {
