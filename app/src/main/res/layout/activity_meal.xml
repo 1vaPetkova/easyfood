@@ -101,7 +101,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/myfont"
                 android:text="@string/instructions"
-                android:textColor="@color/black"
+                android:textColor="@color/g_black"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
                 android:id="@+id/tv_instructions_steps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/g_black"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="@id/tv_instructions"
                 app:layout_constraintTop_toBottomOf="@+id/tv_instructions">
