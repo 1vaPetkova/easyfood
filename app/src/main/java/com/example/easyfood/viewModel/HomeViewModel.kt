@@ -19,11 +19,19 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     private var categoriesLiveData = MutableLiveData<List<Category>>()
     private var favouriteMealsLiveData = mealDatabase.mealDao().getAllMeals()
     private var popularMealLiveData = MutableLiveData<Meal>()
+
+    //in order the user to see the same device when turns from portrait to landscape view
+    var safeStateRandomMeal: Meal? = null
     fun getRandomMeal() {
+        safeStateRandomMeal?.let {
+            randomMealLiveData.postValue(it)
+            return
+        }
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList> {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
                 response.body()?.let {
                     randomMealLiveData.postValue(it.meals[0])
+                    safeStateRandomMeal = it.meals[0]
                 }
             }
 
