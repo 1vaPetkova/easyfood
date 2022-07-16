@@ -6,7 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.easyfood.R
+import com.example.easyfood.activities.CategoryMealsActivity
+import com.example.easyfood.activities.MainActivity
+import com.example.easyfood.adapters.CategoriesAdapter
+import com.example.easyfood.adapters.CategoriesTabAdapter
+import com.example.easyfood.databinding.FragmentCategoriesBinding
+import com.example.easyfood.entities.Category
+import com.example.easyfood.utils.Constants
+import com.example.easyfood.viewModel.HomeViewModel
 
 
 class CategoriesFragment : Fragment() {
