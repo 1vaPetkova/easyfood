@@ -21,9 +21,9 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
     private var popularMealLiveData = MutableLiveData<Meal>()
 
     //in order the user to see the same device when turns from portrait to landscape view
-    var safeStateRandomMeal: Meal? = null
+    var savedStateRandomMeal: Meal? = null
     fun getRandomMeal() {
-        safeStateRandomMeal?.let {
+        savedStateRandomMeal?.let {
             randomMealLiveData.postValue(it)
             return
         }
@@ -31,7 +31,7 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
                 response.body()?.let {
                     randomMealLiveData.postValue(it.meals[0])
-                    safeStateRandomMeal = it.meals[0]
+                    savedStateRandomMeal = it.meals[0]
                 }
             }
 

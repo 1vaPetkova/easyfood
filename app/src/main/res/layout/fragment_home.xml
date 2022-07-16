@@ -92,7 +92,7 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:fontFamily="@font/myfont"
                 android:text="@string/random_meal_name"
-                android:textColor="@color/accent"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/random_meal_card"
