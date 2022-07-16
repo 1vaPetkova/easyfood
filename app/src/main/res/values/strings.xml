@@ -18,4 +18,5 @@
     <string name="category_name">Category name</string>
     <string name="category_description">Category Description</string>
     <string name="meal_name">Meal name</string>
+    <string name="read_more">Read more...</string>
 </resources>

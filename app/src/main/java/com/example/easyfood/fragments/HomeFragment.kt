@@ -20,6 +20,7 @@ import com.example.easyfood.databinding.FragmentHomeBinding
 import com.example.easyfood.entities.Category
 import com.example.easyfood.entities.Meal
 import com.example.easyfood.entities.MealByCategory
+import com.example.easyfood.fragments.bottomSheet.MealBottomSheetFragment
 import com.example.easyfood.utils.Constants.Companion.CATEGORY_DESCRIPTION
 import com.example.easyfood.utils.Constants.Companion.CATEGORY_NAME
 import com.example.easyfood.utils.Constants.Companion.MEAL_ID
@@ -63,12 +64,14 @@ class HomeFragment : Fragment() {
         homeViewModel.getPopularItems()
         observePopularItemsLiveData()
         onPopularItemClick()
+        onPopularItemLongClick()
         //Categories Recycler view
         prepareCategoriesRecyclerView()
         homeViewModel.getCategories()
         observeCategoriesLiveData()
         onCategoryClick()
     }
+
 
     private fun onCategoryClick() {
         categoriesAdapter.onItemClick = {
@@ -89,6 +92,13 @@ class HomeFragment : Fragment() {
         binding.rvCategories.apply {
             layoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
             adapter = categoriesAdapter
+        }
+    }
+
+    private fun onPopularItemLongClick() {
+        popularItemsAdapter.onLongItemClick = {
+            val mealBottomSheetFragment = MealBottomSheetFragment.newInstance(it.idMeal)
+            mealBottomSheetFragment.show(childFragmentManager,"Popular meal info")
         }
     }
 
