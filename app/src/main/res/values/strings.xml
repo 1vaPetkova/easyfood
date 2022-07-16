@@ -3,7 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_fragment">Home fragment</string>
-    <string name="favourites_fragment">Favourites fragment</string>
+    <string name="favourite_meals">Favourite meals</string>
     <string name="categories_fragment">Categories fragment</string>
     <string name="home">Home</string>
     <string name="favourites">Favourites</string>
