@@ -6,25 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.easyfood.activities.MainActivity
 import com.example.easyfood.activities.MealActivity
 import com.example.easyfood.adapters.FavouriteMealsAdapter
 import com.example.easyfood.databinding.FragmentFavouritesBinding
+import com.example.easyfood.db.MealDatabase
 import com.example.easyfood.entities.Meal
 import com.example.easyfood.utils.Constants
 import com.example.easyfood.viewModel.HomeViewModel
+import com.example.easyfood.viewModel.HomeViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class FavouritesFragment : Fragment() {
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by activityViewModels(factoryProducer = {
+        HomeViewModelFactory(MealDatabase.getInstance(requireContext()))
+    })
     private lateinit var binding: FragmentFavouritesBinding
     private lateinit var favouritesAdapter: FavouriteMealsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel = (activity as MainActivity).homeViewModel
         favouritesAdapter = FavouriteMealsAdapter()
     }
 
@@ -63,9 +66,9 @@ class FavouritesFragment : Fragment() {
                         "Meal ${mealToDelete.strMeal} deleted!",
                         Snackbar.LENGTH_LONG
                     )
-                        .setAction("Undo", View.OnClickListener {
+                        .setAction("Undo") {
                             homeViewModel.insertMealToFavourites(mealToDelete)
-                        })
+                        }
                         .show()
                 }
             }

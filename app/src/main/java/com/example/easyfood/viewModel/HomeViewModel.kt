@@ -22,10 +22,12 @@ class HomeViewModel(private val mealDatabase: MealDatabase) : ViewModel() {
 
     //in order the user to see the same device when turns from portrait to landscape view
     var savedStateRandomMeal: Meal? = null
-    fun getRandomMeal() {
-        savedStateRandomMeal?.let {
-            randomMealLiveData.postValue(it)
-            return
+    fun getRandomMeal(shouldReload: Boolean) {
+        if (!shouldReload) {
+            savedStateRandomMeal?.let {
+                randomMealLiveData.postValue(it)
+                return
+            }
         }
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList> {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {

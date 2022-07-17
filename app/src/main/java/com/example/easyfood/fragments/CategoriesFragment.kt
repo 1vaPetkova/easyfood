@@ -6,24 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.easyfood.activities.CategoryMealsActivity
 import com.example.easyfood.activities.MainActivity
 import com.example.easyfood.adapters.CategoriesTabAdapter
 import com.example.easyfood.databinding.FragmentCategoriesBinding
+import com.example.easyfood.db.MealDatabase
 import com.example.easyfood.entities.Category
 import com.example.easyfood.utils.Constants
 import com.example.easyfood.viewModel.HomeViewModel
+import com.example.easyfood.viewModel.HomeViewModelFactory
 
 
 class CategoriesFragment : Fragment() {
-
+    private val homeViewModel: HomeViewModel by activityViewModels(factoryProducer = {
+        HomeViewModelFactory(MealDatabase.getInstance(requireContext()))
+    })
     private lateinit var binding: FragmentCategoriesBinding
     private lateinit var categoriesAdapter: CategoriesTabAdapter
-    private lateinit var homeViewModel: HomeViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel = (activity as MainActivity).homeViewModel
         categoriesAdapter = CategoriesTabAdapter()
     }
 

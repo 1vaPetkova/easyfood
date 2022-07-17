@@ -6,17 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
 import com.example.easyfood.activities.CategoryMealsActivity
-import com.example.easyfood.activities.MainActivity
 import com.example.easyfood.activities.MealActivity
 import com.example.easyfood.adapters.CategoriesAdapter
 import com.example.easyfood.adapters.MostPopularMealsAdapter
 import com.example.easyfood.databinding.FragmentHomeBinding
+import com.example.easyfood.db.MealDatabase
 import com.example.easyfood.entities.Category
 import com.example.easyfood.entities.Meal
 import com.example.easyfood.entities.MealByCategory
@@ -28,18 +28,20 @@ import com.example.easyfood.utils.Constants.Companion.MEAL_NAME
 import com.example.easyfood.utils.Constants.Companion.MEAL_THUMB
 import com.example.easyfood.utils.Constants.Companion.YOUTUBE_URI
 import com.example.easyfood.viewModel.HomeViewModel
+import com.example.easyfood.viewModel.HomeViewModelFactory
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by activityViewModels(factoryProducer = {
+        HomeViewModelFactory(MealDatabase.getInstance(requireContext()))
+    })
     private lateinit var randomMeal: Meal
     private lateinit var popularItemsAdapter: MostPopularMealsAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel = (activity as MainActivity).homeViewModel
-        homeViewModel.getRandomMeal()
+        homeViewModel.getRandomMeal(false)
         popularItemsAdapter = MostPopularMealsAdapter()
         categoriesAdapter = CategoriesAdapter()
     }
@@ -50,7 +52,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.tvHome.setOnClickListener { homeViewModel.getRandomMeal() }
+        binding.tvHome.setOnClickListener { homeViewModel.getRandomMeal(true) }
         return binding.root
     }
 
@@ -98,7 +100,7 @@ class HomeFragment : Fragment() {
     private fun onPopularItemLongClick() {
         popularItemsAdapter.onLongItemClick = {
             val mealBottomSheetFragment = MealBottomSheetFragment.newInstance(it.idMeal)
-            mealBottomSheetFragment.show(childFragmentManager,"Popular meal info")
+            mealBottomSheetFragment.show(childFragmentManager, "Popular meal info")
         }
     }
 
